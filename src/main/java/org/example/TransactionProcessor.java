@@ -16,11 +16,11 @@ import java.util.Set;
 
 public class TransactionProcessor {
 
-    private static final Path USERS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/manual test data 75% validations/input/users.csv");
-    private static final Path TRANSACTIONS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/manual test data 75% validations/input/transactions.csv");
-    private static final Path BIN_MAPPINGS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/manual test data 75% validations/input/bins.csv");
-    private static final Path BALANCES_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data (small)/output example/balances.csv");
-    private static final Path EVENTS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data (small)/output example/events.csv");
+    private static final Path USERS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data 50% validations/input/users.csv");
+    private static final Path TRANSACTIONS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data 50% validations/input/transactions.csv");
+    private static final Path BIN_MAPPINGS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data 50% validations/input/bins.csv");
+    private static final Path BALANCES_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data 50% validations/output example/balances.csv");
+    private static final Path EVENTS_CSV_PATH = Paths.get("/Users/olegtrofimov/IdeaProjects/Playtech Java Assignment 2024 1/test-data/test random data 50% validations/output example/events.csv");
 
     public static void main(final String[] args) throws IOException {
         List<User> users = readUsers();
@@ -59,7 +59,6 @@ public class TransactionProcessor {
 
                     User user = new User(userId, username, balance, country, frozen, depositMin, depositMax, withdrawMin, withdrawMax);
                     users.add(user);
-                    System.out.println("Read user: " + user);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +89,6 @@ public class TransactionProcessor {
 
                     Transaction transaction = new Transaction(transactionId, userId, type, amount, method, accountNumber);
                     transactions.add(transaction);
-                    System.out.println("Read Transaction: " + transaction);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     e.printStackTrace();
                 }
@@ -119,7 +117,6 @@ public class TransactionProcessor {
 
                 BinMapping binMapping = new BinMapping(name, rangeFrom, rangeTo, type, country);
                 binMappings.add(binMapping);
-                System.out.println("Read BinMappings: " + binMapping);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -228,7 +225,6 @@ public class TransactionProcessor {
         event.setStatus(Event.STATUS_DECLINED);
         event.setMessage(errorMessage);
         events.add(event);
-        System.out.println("Error processing transaction: " + transaction.getTransactionId() + ". Reason: " + errorMessage);
     }
 
     private static boolean isUniquePaymentAccount(Transaction transaction, List<User> users) {
@@ -276,7 +272,6 @@ public class TransactionProcessor {
 
                 Transaction transaction = new Transaction(transactionId, userId, type, amount, method, accountNumber);
                 transactions.add(transaction);
-                System.out.println("Read Transactions: " + transaction);
             }
         } catch (IOException e) {
             e.printStackTrace();
